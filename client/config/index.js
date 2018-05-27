@@ -1,6 +1,6 @@
 const config = {
   global: {
-    API_ROOT: "/api"
+    API_ROOT: "https://api.techbikers.com"
   },
   production: {
     AUTH0_CLIENT_ID: "CZuJ8UsHJfF4Xbz4gukAVXC8YlQ2knUC",
