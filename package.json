@@ -18,7 +18,7 @@
   },
   "betterScripts": {
     "watch": {
-      "command": "webpack-dev-server --inline --hot --history-api-fallback --config config/webpack.dev.config.js --port 3000"
+      "command": "webpack-dev-server --inline --hot --history-api-fallback --config config/webpack.dev.config.js --port 3000 --content-base public/"
     },
     "build": {
       "command": "webpack --verbose --colors --display-error-details --config config/webpack.prod.config.js",

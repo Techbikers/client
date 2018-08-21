@@ -3,7 +3,6 @@ const glob = require("glob");
 const webpack = require("webpack");
 const assignIn = require("lodash").assignIn;
 const webpackPostcssTools = require("webpack-postcss-tools");
-const BundleTracker = require("webpack-bundle-tracker");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 function extsToRegExp(exts) {
@@ -177,16 +176,13 @@ module.exports = options => {
     ".scss"
   ];
 
-  const publicPath = options.devServer ? "http://localhost:5000/bundles/" : "/bundles/";
-
   const output = {
     path: path.join(__dirname, "..", "public", "bundles"),
-    publicPath,
+    publicPath: "/bundles/",
     filename: "[name].js"
   };
 
   const plugins = [
-    new BundleTracker({ filename: options.production ? "./webpack-stats-prod.json" : "./webpack-stats.json" }),
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify(options.production ? "production" : "development")
