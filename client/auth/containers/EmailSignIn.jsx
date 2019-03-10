@@ -1,36 +1,31 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
 import forms, { Form } from "newforms";
-import { Link, locationShape } from "react-router";
 
-import { getLocation } from "techbikers/app/selectors";
-import { authenticateUser } from "techbikers/auth/actions";
+import { sendSignInLinkToEmail } from "techbikers/auth/actions";
 
 import Button from "techbikers/components/Button";
 import FormField from "techbikers/components/FormField";
 
 /* eslint-disable babel/new-cap */
 const LoginFormSchema = Form.extend({
-  email: forms.EmailField(),
-  password: forms.CharField({ widget: forms.PasswordInput }),
+  email: forms.EmailField()
 });
 /* eslint-enable */
 
 const mapStateToProps = state => ({
-  location: getLocation(state),
-  loading: state.auth.state === "authenticating"
+  loading: state.auth.state === "loading"
 });
 
 const mapDispatchToProps = {
-  login: authenticateUser
+  sendSignInLinkToEmail
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class LoginForm extends Component {
   static propTypes = {
-    location: locationShape,
     loading: PropTypes.bool,
-    login: PropTypes.func.isRequired
+    sendSignInLinkToEmail: PropTypes.func.isRequired
   };
 
   constructor(options) {
@@ -48,13 +43,13 @@ export default class LoginForm extends Component {
     const { form } = this.state;
 
     if (form.validate()) {
-      const { email, password } = form.cleanedData;
-      this.props.login(email, password);
+      const { email } = form.cleanedData;
+      this.props.sendSignInLinkToEmail(email);
     }
   }
 
   render() {
-    const { loading, location } = this.props;
+    const { loading } = this.props;
     const fields = this.state.form.boundFieldsObj();
 
     return (
@@ -66,12 +61,7 @@ export default class LoginForm extends Component {
         </div>
         <div className="row centerText">
           <div className="span6">
-            <Button loading={loading} type="submit">Login</Button>
-          </div>
-          <div className="span6">
-            Don't have an account yet? <Link to={{ pathname: "/signup", state: { ...location.state } }}>Create one!</Link>
-            <br/>
-            <Link to={{ pathname: "/password/reset", state: { ...location.state } }}>Forgotten your password?</Link>
+            <Button loading={loading} type="submit">Sign In</Button>
           </div>
         </div>
       </form>

@@ -18,6 +18,11 @@ export const getAuthenticatedUser = createSelector(
   (users, id) => users[id]
 );
 
+export const getEmailForSignIn = createSelector(
+  getAuthState,
+  auth => auth.emailForSignIn
+);
+
 export const getAuthCallback = createSelector(
   getAuthState,
   auth => auth.callback || {}

@@ -15,7 +15,7 @@ const wrapComponent = (WrappedComponent, overridePredicate) => {
 
   const mapDispatchToProps = dispatch => ({
     redirectToLogin: returnTo => dispatch(replace({
-      pathname: "/login",
+      pathname: "/signin",
       state: { modal: true, returnTo }
     }))
   });
@@ -38,7 +38,7 @@ const wrapComponent = (WrappedComponent, overridePredicate) => {
 
     checkAuth(props) {
       const { pathname, redirectToLogin } = props;
-      if (!this.allowedAccess(props) && pathname !== "/login") {
+      if (!this.allowedAccess(props) && pathname !== "/signin") {
         redirectToLogin(pathname);
       }
     }

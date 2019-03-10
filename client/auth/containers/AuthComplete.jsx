@@ -6,9 +6,9 @@ import { authCallback } from "techbikers/auth/actions";
 import Spinner from "techbikers/components/Spinner";
 import SpreadBox from "techbikers/components/SpreadBox";
 
-const mapDispatchToProps = {
-  authCallback
-};
+const mapDispatchToProps = (dispatch, props) => ({
+  authCallback: () => dispatch(authCallback(props.location.query.returnTo))
+});
 
 @connect(null, mapDispatchToProps)
 export default class AuthComplete extends Component {
@@ -17,7 +17,7 @@ export default class AuthComplete extends Component {
   };
 
   componentDidMount() {
-    this.props.authCallback(window.location.hash);
+    this.props.authCallback();
   }
 
   render() {

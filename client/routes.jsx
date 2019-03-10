@@ -19,9 +19,8 @@ import RidersListWidget from "techbikers/rides/containers/RidersListWidget";
 // Auth
 import AuthComplete from "techbikers/auth/containers/AuthComplete";
 import OAuthCallback from "techbikers/auth/containers/OAuthCallback";
-import Signup from "techbikers/auth/components/Signup";
-import Login from "techbikers/auth/components/Login";
-import PasswordReset from "techbikers/auth/containers/PasswordReset";
+import SignIn from "techbikers/auth/components/SignIn";
+import ConfirmEmail from "techbikers/auth/components/ConfirmEmail";
 
 // Users
 import Account from "techbikers/users/containers/Account";
@@ -37,7 +36,7 @@ import EmbeddableWidget from "techbikers/components/EmbeddableWidget";
 export default (
   <Route>
     // # Auth Response Handler
-    <Route path="/auth/complete" component={AuthComplete} />
+    <Route path="/signin/complete" component={AuthComplete} />
     <Route path="/oauth/callback" component={OAuthCallback} />
 
     // # Embeddable Widgets
@@ -54,10 +53,9 @@ export default (
       <Route path="the_charity" component={Charity} />
 
       // ## Authentication and Account
-      <Route path="login" component={Login} />
-      <Route path="signup" component={Signup} />
+      <Route path="signin" component={SignIn} />
+      <Route path="signin/confirm" component={ConfirmEmail} />
       <Route path="account" component={Account} />
-      <Route path="password/reset" component={PasswordReset} />
 
       // ## Ride Routing
       <Route path="rides">

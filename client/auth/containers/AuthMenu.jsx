@@ -57,7 +57,7 @@ export default class AuthMenu extends Component {
     } else {
       return (
         <StyledLink to={{
-          pathname: "/login",
+          pathname: "/signin",
           state: { modal: true, returnTo: pathname }
         }}>
           Login to Techbikers

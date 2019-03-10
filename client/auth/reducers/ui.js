@@ -3,15 +3,13 @@ import { combineReducers } from "redux";
 import * as ui from "techbikers/auth/actions/ui";
 
 export default combineReducers({
-  passwordResetStatus
+  emailSignIn
 });
 
-function passwordResetStatus(state = null, { type, payload }) {
+function emailSignIn(state = null, { type }) {
   switch (type) {
-    case ui.UPDATE_PASSWORD_RESET_STATUS:
-      return payload;
-    case ui.CLEAR_PASSWORD_RESET_STATUS:
-      return null;
+    case ui.SHOW_SIGNIN_ERROR_SCREEN:
+      return "error";
     default:
       return state;
   }

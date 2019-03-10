@@ -15,7 +15,7 @@ export default function configureStore(initialState = {}, sagas = []) {
   const authenticationSlicer = () => state => {
     const { state: authState } = state.auth;
 
-    if (authState === "authenticated") {
+    if (authState === "authenticated" || authState === "verifying") {
       return {
         auth: state.auth
       };

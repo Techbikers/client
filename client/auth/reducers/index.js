@@ -1,50 +1,37 @@
-import jwtDecode from "jwt-decode";
-import { handleActions, combineActions } from "redux-actions";
+import { handleActions } from "redux-actions";
 
 import * as actions from "techbikers/auth/actions";
 
 export default handleActions({
-  [combineActions(actions.authenticateUser, actions.signup)]: state => ({
+  [actions.sendSignInLinkToEmail]: state => ({
     ...state,
-    state: "authenticating"
+    state: "loading"
   }),
 
-  [actions.authSuccess]: (state, { payload }) => {
-    const { idToken, accessToken } = payload;
-    const claims = jwtDecode(idToken);
+  [actions.waitForEmailVerification]: (state, { payload }) => ({
+    ...state,
+    state: "verifying",
+    emailForSignIn: payload
+  }),
 
-    return {
-      ...state,
-      state: "authenticated",
-      idToken,
-      accessToken,
-      claims
-    };
-  },
+  [actions.authSuccess]: (state, { payload }) => ({
+    ...state,
+    state: "authenticated",
+    emailForSignIn: null,
+    ...payload
+  }),
 
   [actions.authFailure]: state => ({
     ...state,
-    state: "unauthenticated"
+    state: "unauthenticated",
+    emailForSignIn: null
   }),
 
   [actions.logout]: () => ({
     state: "unauthenticated",
     claims: {}
   }),
-
-  [actions.storeAuthCallback]: (state, { payload }) => ({
-    ...state,
-    callback: {
-      ...payload
-    }
-  }),
-
-  [actions.clearAuthCallback]: state => ({
-    ...state,
-    callback: {}
-  })
 }, {
   state: "unauthenticated",
-  claims: {},
-  callback: {}
+  claims: {}
 });

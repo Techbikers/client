@@ -9,14 +9,20 @@ const config = {
     SENTRY_DSN: "https://eb262b12f8b64d2e895b13e4524e39dd@app.getsentry.com/77036",
     OAUTH_REDIRECT_URI: "https://techbikers.com/oauth/callback",
     JUSTGIVING_AUTH_URL: "https://identity.justgiving.com/connect/authorize",
-    JUSTGIVING_CLIENT_ID: "7af4ae12"
+    JUSTGIVING_CLIENT_ID: "7af4ae12",
+    FIREBASE_API_KEY: "",
+    FIREBASE_AUTH_DOMAIN: "",
+    FIREBASE_AUTH_REDIRECT: "https://techbikers.com/signin/complete"
   },
   development: {
     AUTH0_CLIENT_ID: "IbwUfAd0PX46jll5tDxmU6ARqnJ9HwUO",
     AUTH0_DOMAIN: "techbikers.eu.auth0.com",
     OAUTH_REDIRECT_URI: "http://localhost:3000/oauth/callback",
     JUSTGIVING_AUTH_URL: "https://identity.staging.justgiving.com/connect/authorize",
-    JUSTGIVING_CLIENT_ID: "b1533b12"
+    JUSTGIVING_CLIENT_ID: "b1533b12",
+    FIREBASE_API_KEY: "AIzaSyAEyLSTyxCESgZyF2jwXWqvZqMm0KyPvkY",
+    FIREBASE_AUTH_DOMAIN: "techbikers-website-staging.firebaseapp.com",
+    FIREBASE_AUTH_REDIRECT: "http://localhost:3000/signin/complete"
   }
 };
 
