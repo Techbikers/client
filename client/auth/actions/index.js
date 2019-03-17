@@ -7,11 +7,6 @@ export const authenticateUser = createAction(AUTHENTICATE_USER,
   (email, password) => ({ email, password })
 );
 
-export const AUTHENTICATE_SOCIAL_USER = "AUTHENTICATE_SOCIAL_USER";
-export const authenticateSocialUser = createAction(AUTHENTICATE_SOCIAL_USER,
-  (connection, callbackReturnTo, callbackAction) => ({ connection, callbackReturnTo, callbackAction })
-);
-
 export const AUTHENTICATION_SUCCESS = "AUTHENTICATION_SUCCESS";
 export const authSuccess = createAction(AUTHENTICATION_SUCCESS);
 
@@ -42,6 +37,11 @@ export const authFailure = createAction(AUTHENTICATION_FAILURE);
 
 export const AUTHENTICATION_CALLBACK = "AUTHENTICATION_CALLBACK";
 export const authCallback = createAction(AUTHENTICATION_CALLBACK);
+
+export const OAUTH_CALLBACK = "OAUTH_CALLBACK";
+export const oAuthCallback = createAction(OAUTH_CALLBACK,
+  (code, state) => ({ code, state })
+);
 
 export const REFRESH_TOKEN = "REFRESH_TOKEN";
 export const refreshToken = createAction(REFRESH_TOKEN);

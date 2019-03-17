@@ -4,7 +4,6 @@ import { replace } from "react-router-redux";
 
 import { INIT } from "techbikers/app/actions";
 import { addError } from "techbikers/errors/actions";
-import { getLocation } from "techbikers/app/selectors";
 import authService from "techbikers/auth/services";
 import {
   createTextNotification,
@@ -60,27 +59,6 @@ export function* authenticateUser({ payload }) {
 }
 
 /**
- * Authenticate the user using a social connection
- * @param {string} payload The connection to use
- */
-export function* authenticateSocialUser({ payload }) {
-  const { connection, callbackReturnTo, callbackAction } = payload;
-
-  // Decide where we are redirecting to during the callback
-  // 1) callbackReturnTo if set
-  // 2) returnTo if in location state (this would be if the auth is in a modal)
-  // 3) current location
-  const location = yield select(getLocation);
-  const returnTo = callbackReturnTo || (location.state && location.state.returnTo) || location.pathname;
-
-  // Store the details of which actions to perform when the user returns
-  yield put(actions.storeAuthCallback(returnTo, callbackAction));
-
-  // Now redirect the user to the Auth0 Authorization URL
-  yield authService.authorize(connection);
-}
-
-/**
  * Handle the callback from a redirected authentication call to Auth0
  * @param {string} payload The URL on the callback URL
  */
@@ -115,6 +93,30 @@ function* authCallback({ payload }) {
       put(replace(returnTo || "/")),
       put(actions.clearAuthCallback())
     ];
+  }
+}
+
+/**
+ * Handle the callback from an OAuth provider
+ * @param {Object} payload
+ * @param {string} payload.code  The authorization code returned from the provider
+ * @param {Object} payload.state The state returned back to us via the provider
+ */
+function* oauthCallback({ payload }) {
+  // If there is no payload then send them home
+  if (!payload) {
+    yield put(replace("/"));
+    return;
+  }
+
+  const { code, state: { callback } } = payload;
+
+  // Dispatch any callback actions
+  if (callback && typeof callback.type === "string") {
+    // Get details about the next action and add the code into
+    // the payload so the action can use it
+    const action = { type: callback.type, payload: { code, ...callback.payload } };
+    yield put(action);
   }
 }
 
@@ -209,8 +211,8 @@ export default function* root() {
   yield [
     fork(takeEvery, INIT, checkAuthState),
     fork(takeEvery, actions.AUTHENTICATE_USER, authenticateUser),
-    fork(takeEvery, actions.AUTHENTICATE_SOCIAL_USER, authenticateSocialUser),
     fork(takeEvery, actions.AUTHENTICATION_CALLBACK, authCallback),
+    fork(takeEvery, actions.OAUTH_CALLBACK, oauthCallback),
     fork(takeEvery, actions.AUTHENTICATION_SUCCESS, completeAuthentication),
     fork(takeEvery, actions.BEGIN_PASSWORD_RESET, resetPassword),
     fork(takeEvery, actions.SIGNUP, createUserAndAuthenticate),
