@@ -17,6 +17,7 @@ import RideDetails from "techbikers/rides/containers/RideDetails";
 
 // Auth
 import AuthComplete from "techbikers/auth/containers/AuthComplete";
+import OAuthCallback from "techbikers/auth/containers/OAuthCallback";
 import Signup from "techbikers/auth/components/Signup";
 import Login from "techbikers/auth/components/Login";
 import PasswordReset from "techbikers/auth/containers/PasswordReset";
@@ -32,6 +33,7 @@ export default (
   <Route>
     // # Auth Response Handler
     <Route path="/auth/complete" component={AuthComplete} />
+    <Route path="/oauth/callback" component={OAuthCallback} />
 
     // # Main App handler
     <Route path="/" component={AppContainer}>
