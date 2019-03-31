@@ -52,7 +52,7 @@ export default class Rides extends Component {
   render() {
     const { upcoming, past } = this.props;
 
-    if (upcoming.length === 0 || past.length === 0) {
+    if (!upcoming.length && !past.length) {
       return <Spinner />;
     }
 
