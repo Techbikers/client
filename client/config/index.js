@@ -14,9 +14,8 @@ const config = {
   development: {
     AUTH0_CLIENT_ID: "IbwUfAd0PX46jll5tDxmU6ARqnJ9HwUO",
     AUTH0_DOMAIN: "techbikers.eu.auth0.com",
-    SEGMENT_TRACKING_KEY: "",
     OAUTH_REDIRECT_URI: "http://localhost:3000/oauth/callback",
-    JUSTGIVING_AUTH_URL: "https://identity.justgiving.com/connect/authorize",
+    JUSTGIVING_AUTH_URL: "https://identity.staging.justgiving.com/connect/authorize",
     JUSTGIVING_CLIENT_ID: "b1533b12"
   }
 };
