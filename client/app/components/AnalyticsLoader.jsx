@@ -16,7 +16,7 @@ export default class AnalyticsLoader extends Component {
 
   componentWillMount() {
     // Add the scripts and setup tracking if it hasn't been done yet
-    if (!this.state.invoked) {
+    if (!this.state.invoked && this.props.segmentKey) {
       this.invoke();
 
       // Make the first page call to load the integrations. If
