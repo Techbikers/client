@@ -15,7 +15,7 @@ export function createTextNotification(text, timeout = 3000) {
   return createNotification({ type: "text", text, timeout });
 }
 
-export function createErrorNotification(text, timeout = 5000) {
+export function createErrorNotification(text, timeout = 9000) {
   return createNotification({ type: "error", text, timeout });
 }
 
