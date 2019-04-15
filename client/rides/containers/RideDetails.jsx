@@ -2,7 +2,6 @@ import React, { PropTypes, Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router";
 import DocumentTitle from "react-document-title";
-import { FormattedNumber } from "react-intl";
 
 import { fetchRideById } from "techbikers/rides/actions";
 import { fetchSponsorsByRide } from "techbikers/sponsors/actions";
@@ -17,6 +16,7 @@ import RideRegistration from "techbikers/rides/containers/RideRegistration";
 import ConnectedRidersList from "techbikers/rides/containers/ConnectedRidersList";
 import Timestamp from "techbikers/components/Timestamp";
 import Spinner from "techbikers/components/Spinner";
+import FundraisingTotal from "techbikers/fundraisers/components/FundraisingTotal";
 
 const mapStateToProps = state => ({
   ride: getCurrentRide(state),
@@ -79,7 +79,7 @@ export default class RidePage extends Component {
               </header>
 
               <div className="content">
-                <h2>We've raised <FormattedNumber style="currency" currency={ride.currency} value={ride.fundraisingTotal} maximumFractionDigits={0} minimumFractionDigits={0} />!</h2>
+                <h2>We've raised <FundraisingTotal currency={ride.currency} total={ride.fundraisingTotal} />!</h2>
               </div>
             </section>
 

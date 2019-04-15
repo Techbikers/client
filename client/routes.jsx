@@ -28,12 +28,21 @@ import Profile from "techbikers/users/containers/Profile";
 
 // Fundraising
 import Leaderboard from "techbikers/fundraisers/containers/Leaderboard";
+import FundraisingTotalWidget from "techbikers/fundraisers/containers/FundraisingTotalWidget";
+
+// Embedable Widgets
+import EmbeddableWidget from "techbikers/components/EmbeddableWidget";
 
 export default (
   <Route>
     // # Auth Response Handler
     <Route path="/auth/complete" component={AuthComplete} />
     <Route path="/oauth/callback" component={OAuthCallback} />
+
+    // # Embeddable Widgets
+    <Route path="/embed/" component={EmbeddableWidget} >
+      <Route path="fundraising-total" component={FundraisingTotalWidget} />
+    </Route>
 
     // # Main App handler
     <Route path="/" component={AppContainer}>
