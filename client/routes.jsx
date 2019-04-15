@@ -14,6 +14,7 @@ import ChapterDetails from "techbikers/chapters/containers/ChapterDetails";
 // Rides
 import Rides from "techbikers/rides/containers/Rides";
 import RideDetails from "techbikers/rides/containers/RideDetails";
+import RidersListWidget from "techbikers/rides/containers/RidersListWidget";
 
 // Auth
 import AuthComplete from "techbikers/auth/containers/AuthComplete";
@@ -42,6 +43,7 @@ export default (
     // # Embeddable Widgets
     <Route path="/embed/" component={EmbeddableWidget} >
       <Route path="fundraising-total" component={FundraisingTotalWidget} />
+      <Route path="riders-list" component={RidersListWidget} />
     </Route>
 
     // # Main App handler
